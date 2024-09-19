@@ -5,7 +5,7 @@ pipeline{
         stage('checkout')
         {
             steps{
-                git 'https://github.com/devaraj2002/mentorprroject.git'
+                git 'https://github.com/devaraj2002/mentorproject1.git'
                 sh 'pwd'
             }
         }
@@ -23,6 +23,7 @@ pipeline{
                 sh 'pwd && ls'
                // sh 'sudo cp -r ./hello-world/* ./'
                 sh 'cd /var/lib/jenkins/workspace/project-demo/hello-world/ &&  docker build -t tomcat:latest .'
+                sh 'docker rm -f tomcat1'
                 sh 'docker run -itd --name tomcat1 -p 8081:8080 tomcat:latest'
             }
         }
