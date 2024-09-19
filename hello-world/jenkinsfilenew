@@ -1,0 +1,31 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('checkout')
+        {
+            steps
+            {
+                git 'https://github.com/devaraj2002/mentorproject1.git'
+            }
+        }
+        
+        stage('build')
+        {
+            steps
+            {
+                sh 'cd ./hello-world/ && mvn clean install'
+            }
+        }
+        stage('containerization')
+        {
+            steps
+            {
+               sh 'cd ./hello-world/ && docker build -t tomcat:latest .'
+               sh 'docker rm -f tomcat1'
+               sh 'docker run -itd --name tomcat1 -p 8081:8080 tomcat:latest'
+            }
+        }
+    }
+}
